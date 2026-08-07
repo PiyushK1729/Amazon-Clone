@@ -21,7 +21,8 @@ cart.forEach((cartItem) => {
   });
 
   cartSummaryHTML += `
-    <div class="cart-item-container ">
+    <div class="cart-item-container 
+      js-cart-item-container-${matchingProduct.id}">
     <div class="delivery-date">
       Delivery date: Tuesday, June 21
     </div>
@@ -109,6 +110,8 @@ document.querySelectorAll('.js-delete-link')
     link.addEventListener('click' , () => {
       const productId = link.dataset.productId;
       removeFromCart(productId);
-      
+
+      const container = document.querySelector(`.js-cart-item-container-${productId}`) //here we used ${productId} because above we gave class as the ${matchingProduct.id} and the only time document.query will select the container of the product with the id same as the product we clicked delete button for...therefore delete when we click delete btn the container will be selected and using remove() will delete is from page
+      container.remove();
     } )
   })
