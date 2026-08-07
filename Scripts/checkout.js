@@ -1,8 +1,9 @@
 //before coming here we went to cart.js and gave cart 2 default values and then using the array of objects : cart...we are going to write HTML code for JS
 
-import {cart} from '../data/cart.js';
+import {cart , removeFromCart} from '../data/cart.js';
 import {products} from '../data/products.js' //we use this to get full product info
 import {formatCurrency} from './utils/money.js' //./ because we are in same folder trying to access another folder
+
 
 let cartSummaryHTML = '';
 
@@ -43,7 +44,7 @@ cart.forEach((cartItem) => {
           <span class="update-quantity-link link-primary">
             Update
           </span>
-          <span class="delete-quantity-link link-primary">
+          <span class="delete-quantity-link link-primary js-delete-link" data-product-id = ${matchingProduct.id}>
             Delete
           </span>
         </div>
@@ -103,3 +104,11 @@ document.querySelector('.js-order-summary')
   .innerHTML = cartSummaryHTML;
 
 
+document.querySelectorAll('.js-delete-link')
+  .forEach((link)=> {
+    link.addEventListener('click' , () => {
+      const productId = link.dataset.productId;
+      removeFromCart(productId);
+      
+    } )
+  })
