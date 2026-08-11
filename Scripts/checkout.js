@@ -1,6 +1,6 @@
 //before coming here we went to cart.js and gave cart 2 default values and then using the array of objects : cart...we are going to write HTML code for JS
 
-import {cart , removeFromCart} from '../data/cart.js';
+import {cart , removeFromCart ,updateDeliveryOption} from '../data/cart.js';
 import {products} from '../data/products.js' //we use this to get full product info
 import {formatCurrency} from './utils/money.js' //./ because we are in same folder trying to access another folder
 
@@ -33,6 +33,8 @@ cart.forEach((cartItem) => {
 
     }
   });
+
+
 
   const deliveryOptionId= cartItem.deliveryOptionId;
 
@@ -118,7 +120,9 @@ function deliveryOptionsHTML(matchingProduct , cartItem){
 
   html +=  
 
-  ` <div class="delivery-option">
+  ` <div class="delivery-option js-delivery-option"
+      deta-product-id="${matchingProduct.id}"
+      data-delivery-option-id="${deliveryOption.id}">
       <input type="radio"
         ${isChecked  ? 'checked' : ''}
         class="delivery-option-input"
@@ -159,4 +163,13 @@ document.querySelectorAll('.js-delete-link')
     
     document.querySelector('.js-total-items')
     .innerHTML = `${cartQuantity} items`;
-  })
+    });
+
+
+      document.querySelectorAll('.js-delivery-option')
+    .forEach((element) => {
+      element.addEventListener('click' , () =>{
+        const {productId , deliveryOptionId} = element.dataset;
+        updateDeliveryOption(productId , deliveryOptionId);
+      })
+    });

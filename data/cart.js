@@ -18,7 +18,7 @@ function saveToStorage(){
 }
 
 export function addToCart(productId){
-        let matchingItem;
+        let matchingItem;       //this is to find the cartItem which is equal to the productId to know which product is in the cart
 
       cart.forEach((cartItem) =>{
         if( productId === cartItem.productId ){
@@ -51,4 +51,20 @@ export function removeFromCart(productId){
   cart = newCart;
 
   saveToStorage();
-}
+};
+
+
+
+  //the below function is for updating deliveryOptionId...like 1 or 2 or 3 and for that we take two parameters which is productId...for knowing the product we want our deliveryOptionId to change the the deliveryOptionId itself for the option we chose
+export function updateDeliveryOption(productId , deliveryOptionId) {
+  let matchingItem;
+    cart.forEach((cartItem) =>{
+      if( productId === cartItem.productId ){
+        matchingItem = cartItem;
+      }
+    });
+
+    matchingItem.deliveryOptionId = deliveryOptionId;
+    saveToStorage();
+  };
+
