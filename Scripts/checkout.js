@@ -121,7 +121,7 @@ function deliveryOptionsHTML(matchingProduct , cartItem){
   html +=  
 
   ` <div class="delivery-option js-delivery-option"
-      deta-product-id="${matchingProduct.id}"
+      data-product-id="${matchingProduct.id}"
       data-delivery-option-id="${deliveryOption.id}">
       <input type="radio"
         ${isChecked  ? 'checked' : ''}
@@ -166,7 +166,7 @@ document.querySelectorAll('.js-delete-link')
     });
 
 
-      document.querySelectorAll('.js-delivery-option')
+    document.querySelectorAll('.js-delivery-option')
     .forEach((element) => {
       element.addEventListener('click' , () =>{
         const {productId , deliveryOptionId} = element.dataset;
