@@ -1,3 +1,17 @@
+export function getProduct(productId) {
+      let matchingProduct;
+
+    products.forEach((product)=>{   //we loop through the product array and check if the selected id is equal
+      if (product.id === productId) { //to which id in array..and then we get full info of that product
+        matchingProduct = product;  //inside the matchingProduct and using that we input the required info of product in our HTML in Js given below
+
+      }
+    });
+
+    return matchingProduct;
+}
+
+
 export const products = [
   {
     id: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",

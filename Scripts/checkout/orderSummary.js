@@ -1,14 +1,11 @@
 //before coming here we went to cart.js and gave cart 2 default values and then using the array of objects : cart...we are going to write HTML code for JS
 
 import {cart , removeFromCart ,updateDeliveryOption} from '../../data/cart.js';
-import {products} from '../../data/products.js' //we use this to get full product info
+import {products ,getProduct} from '../../data/products.js' //we use this to get full product info
 import {formatCurrency} from '../utils/money.js' //./ because we are in same folder trying to access another folder
-
 import {hello} from 'https://unpkg.com/supersimpledev@1.0.1/hello.esm.js';
-
 import dayjs from 'https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js'
-
-import {deliveryOptions} from '../../data/deliveryOptions.js';
+import {deliveryOptions ,getDeliveryOption} from '../../data/deliveryOptions.js';
 
 hello();
 
@@ -31,26 +28,12 @@ export function renderOrderSummary() { // we did this function to update the pag
 
     const productId = cartItem.productId  //we use product id to get the images and every other details
 
-    let matchingProduct;
-
-    products.forEach((product)=>{   //we loop through the product array and check if the selected id is equal
-      if (product.id === productId) { //to which id in array..and then we get full info of that product
-        matchingProduct = product;  //inside the matchingProduct and using that we input the required info of product in our HTML in Js given below
-
-      }
-    });
-
+    const matchingProduct = getProduct(productId);
 
 
     const deliveryOptionId= cartItem.deliveryOptionId;
 
-    let deliveryOption;
-
-    deliveryOptions.forEach((option) => {
-      if (option.id === deliveryOptionId){
-        deliveryOption = option;
-      }
-    })
+    const deliveryOption = getDeliveryOption(deliveryOptionId);
 
       const today = dayjs();
       const deliveryDate = today.add(
