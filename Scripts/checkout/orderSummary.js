@@ -6,15 +6,8 @@ import {formatCurrency} from '../utils/money.js' //./ because we are in same fol
 import {hello} from 'https://unpkg.com/supersimpledev@1.0.1/hello.esm.js';
 import dayjs from 'https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js'
 import {deliveryOptions ,getDeliveryOption} from '../../data/deliveryOptions.js';
+import {renderPaymentSummary} from './paymentSummary.js'
 
-hello();
-
-const today = dayjs();
-const deliveryDate = today.add(7 , 'days');
-
-const todayDate = today.format('dddd, MMMM D' );
-
-console.log(deliveryDate.format('dddd, MMMM D' ));
 
 
 export function renderOrderSummary() { // we did this function to update the page just after clicking new delivery options..the idea is that whener new value come we just simply run the whole html of the page with the new values...this helps is updating multiple things on a single page without error!!
@@ -142,6 +135,8 @@ export function renderOrderSummary() { // we did this function to update the pag
 
         const container = document.querySelector(`.js-cart-item-container-${productId}`) //here we used ${productId} because above we gave class as the ${matchingProduct.id} and the only time document.query will select the container of the product with the id same as the product we clicked delete button for...therefore delete when we click delete btn the container will be selected and using remove() will delete is from page
         container.remove();
+
+        renderPaymentSummary();
       } )
     })
 
@@ -161,6 +156,7 @@ export function renderOrderSummary() { // we did this function to update the pag
           const {productId , deliveryOptionId} = element.dataset;
           updateDeliveryOption(productId , deliveryOptionId);
           renderOrderSummary();
+          renderPaymentSummary();
         })
       });
 
