@@ -3,19 +3,19 @@
 
 class Cart {
   cartItems;
-  localStorageKey;
+  #localStorageKey; //# is used to implement private property so it can be accessed only in this class
 
 
   //constructor is used to put setup code in the class
   constructor (localStorageKey) { 
-    this.localStorageKey = localStorageKey;
-    this.loadFromStorage();
+    this.#localStorageKey = localStorageKey;
+    this.#loadFromStorage();
 
   }
 
 
-  loadFromStorage() {        //loadFromStorage :  function() replaced this with loadFromStorage() as shortcut
-    this.cartItems = JSON.parse(localStorage.getItem(this.localStorageKey)) ;
+  #loadFromStorage() {        //loadFromStorage :  function() replaced this with loadFromStorage() as shortcut
+    this.cartItems = JSON.parse(localStorage.getItem(this.#localStorageKey)) ;
 
     if(!this.cartItems){
       this.cartItems = [{
@@ -33,7 +33,7 @@ class Cart {
 
 
   saveToStorage(){
-    localStorage.setItem(this.localStorageKey,JSON.stringify(this.cartItems));
+    localStorage.setItem(this.#localStorageKey,JSON.stringify(this.cartItems));
   } 
 
   addToCart(productId){
