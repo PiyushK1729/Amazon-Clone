@@ -53,7 +53,7 @@ export function renderOrderSummary() { // we did this function to update the pag
             ${matchingProduct.name}
           </div>
           <div class="product-price">
-            $${formatCurrency(matchingProduct.priceCents) }
+            ${matchingProduct.getPrice()}
           </div>
           <div class="product-quantity
           js-product-quantity-${matchingProduct.id}">
