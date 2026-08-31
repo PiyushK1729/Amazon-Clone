@@ -1,4 +1,4 @@
-// this. points to the object 
+// this. is used inside an object which points to the outer object  basically this lets an object use its own property!!
 
 
 class Cart {

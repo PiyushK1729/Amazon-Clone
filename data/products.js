@@ -63,7 +63,39 @@ class Clothing extends Product {
 
 }
 
+/*
+const date = new Date();
 
+console.log(date);
+console.log(date.toLocaleTimeString());
+*/
+
+/*
+console.log(this);
+
+const object2 = {
+  a : 2 ,
+  b : this.a //this gives error because there is no object to point to
+}
+
+console.log(object2);
+*/
+
+/*
+function logThis() {
+  console.log(this);
+}
+
+logThis();
+logThis.call('hello'); //does the same this as logThis() but in call() we can give different values like hello
+
+const obj3 = {
+  method : () => {
+    console.log(this)
+  }
+}
+obj3.method();
+*/
 
 export const products = [
   {
