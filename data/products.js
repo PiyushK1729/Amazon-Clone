@@ -38,7 +38,32 @@ class Product {
   getPrice() {
     return `$${formatCurrency(this.priceCents)}`;
   }
+
+  extraInfoHTML() {  //this is for normal products which are not clothing so that the size chart doesnt give error
+    return '';
+  }
 }
+
+class Clothing extends Product {
+  sizeChartLink;
+
+  constructor (productDetails) {
+    super(productDetails);
+    this.sizeChartLink = productDetails.sizeChartLink;
+  }
+
+  extraInfoHTML() {
+    //super.extraInfoHtml();
+    return `
+      <a href="${this.sizeChartLink}" target="_blank">
+      Size Chart
+      </a>
+    `
+  }
+
+}
+
+
 
 export const products = [
   {
@@ -700,6 +725,9 @@ export const products = [
     ]
   }
 ].map((productDetails) => {
+  if (productDetails.type === "clothing") {
+    return new Clothing(productDetails);
+  }
   return new Product(productDetails);
 });
 
