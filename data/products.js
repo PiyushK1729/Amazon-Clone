@@ -770,6 +770,34 @@ export const products = [
 
 export let products = [];
 
+export function loadProductsFetch(){//fetch does same as XMLHttpRequest but it simpler as given below
+  const promise = fetch(
+    'https://supersimplebackend.dev/products'
+  ).then( (response) => { //fetch uses promise so we use .then() to get the response after sending the request to backend 
+    return response.json() //it gives the response from the backend and have products data which we can have using .then(parameter)
+
+  }).then( (productsData) => {
+    products = productsData.map((productDetails) => {
+  if (productDetails.type === "clothing") {
+    return new Clothing(productDetails);
+  }
+  return new Product(productDetails);
+});
+
+  console.log('load products')
+
+
+  }); 
+  
+  return promise;
+  }
+ 
+/*
+loadProductsFetch().then( () => {
+  console.log('next step')
+});
+*/
+
 export function loadProducts(fun) { //fun parameter will have the function we want to run after getting the products from backend
   const xhr = new XMLHttpRequest()
   
