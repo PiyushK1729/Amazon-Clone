@@ -97,6 +97,8 @@ const obj3 = {
 obj3.method();
 */
 
+// here we use the product filr to load the products on the page
+/*
 export const products = [
   {
     id: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
@@ -762,4 +764,29 @@ export const products = [
   }
   return new Product(productDetails);
 });
+*/
+
+// now we are going to use the backend to load the product on the web page
+
+export let products = [];
+
+export function loadProducts(fun) { //fun parameter will have the function we want to run after getting the products from backend
+  const xhr = new XMLHttpRequest()
+  
+  xhr.addEventListener('load' , () => {
+    products = JSON.parse(xhr.response).map((productDetails) => { //we use map to loop through the array and get the product details and then we check if the product is clothing or not and then we return the product details accordingly and get these details in classes basically changing object in class
+  if (productDetails.type === "clothing") {
+    return new Clothing(productDetails);
+  }
+  return new Product(productDetails);
+});
+
+  console.log('load products')
+
+  fun();
+  });
+  
+  xhr.open('GET' , 'https://supersimplebackend.dev/products')
+  xhr.send();
+}
 
