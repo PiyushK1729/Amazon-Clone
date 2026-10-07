@@ -29,6 +29,24 @@ new Promise( (resolve) => {  //promise creates 2 group of codes..in one group pr
 })
 */    
 
+async function loadPage() {
+
+  await loadProductsFetch(); //await helps in first executing the given code and then goes to next line
+                            //first the product loads and wait for it to load using await
+
+  await new Promise((resolve) => { //then cart is loaded and waited for it using await
+    loadCart(() => {
+      resolve();
+    });
+  });  
+
+    renderOrderSummary(); //then simply desplay it using these functions
+    renderPaymentSummary();
+
+}
+loadPage();
+
+/*
 Promise.all([
   loadProductsFetch() ,
   new Promise((resolve) => {
@@ -42,6 +60,7 @@ Promise.all([
     renderOrderSummary();
     renderPaymentSummary();  
 })
+*/
 
 /*
 loadProducts( () => { 
