@@ -14,3 +14,5 @@ A fully responsive, modular e-commerce web application inspired by Amazon. Built
 - JavaScript (ES6 Modules, Async/Await, Fetch API)
 - Day.js (Third-party date library)
 - LocalStorage API
+  
+## https://piyushk1729.github.io/Amazon-Clone/
