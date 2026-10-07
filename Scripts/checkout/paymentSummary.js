@@ -82,7 +82,7 @@ export function renderPaymentSummary() {
       console.log('Unexpected Error');
     }
 
-    window.location.href = 'orders.html';  
+    //window.location.href = 'orders.html';  //this gets you to the another location or file!!
 
   }) 
 }
