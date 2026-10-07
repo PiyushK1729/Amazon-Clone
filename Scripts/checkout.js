@@ -30,15 +30,27 @@ new Promise( (resolve) => {  //promise creates 2 group of codes..in one group pr
 */    
 
 async function loadPage() {
+  try { //this try the code written inside and check for error and if there is error it goes to catch
+
+    //throw 'error1' this gives error manually
 
   await loadProductsFetch(); //await helps in first executing the given code and then goes to next line
                             //first the product loads and wait for it to load using await
 
-  await new Promise((resolve) => { //then cart is loaded and waited for it using await
+  await new Promise((resolve , reject) => { //then cart is loaded and waited for it using await
+    
+    // throw 'error2'
+
     loadCart(() => {
+      // reject('error3)
       resolve();
     });
-  });  
+  }); 
+  } catch (error) { //after the error this executes
+    console.log('Unexpected Error. Please try again')
+  }
+
+ 
 
     renderOrderSummary(); //then simply desplay it using these functions
     renderPaymentSummary();

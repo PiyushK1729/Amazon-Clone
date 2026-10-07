@@ -786,11 +786,13 @@ export function loadProductsFetch(){//fetch does same as XMLHttpRequest but it s
 
   console.log('load products')
 
-
+  }).catch((error) => { //here also we are trying to handle an unexpected error..we can use .this() or .catch() 
+    console.log('Unexpected Error. Please try again later')
   }); 
   
   return promise;
   }
+ 
  
 /*
 loadProductsFetch().then( () => {
@@ -813,8 +815,15 @@ export function loadProducts(fun) { //fun parameter will have the function we wa
 
   fun();
   });
+
+  //we are using the above callback code to send request and get products from backend but there is a chance of getting some type of error so for that we make a backup callback for the case of error
+
+  xhr.addEventListener('error' , () => {
+    console.log('Unexpected Error. Please try again later')
+  })
   
   xhr.open('GET' , 'https://supersimplebackend.dev/products')
   xhr.send();
 }
+
 
